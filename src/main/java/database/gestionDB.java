@@ -11,7 +11,8 @@ public class gestionDB {
 
             // Crear la base de datos
             Statement crearBD = miConexion.createStatement();
-            crearBD.executeUpdate("CREATE DATABASE miBD");
+            crearBD.executeUpdate("DROP DATABASE IF EXISTS mibd");
+            crearBD.executeUpdate("CREATE DATABASE mibd");
 
         } catch (SQLException e) {
             System.err.println("\n>>> ERROR: error al conectar a la base de datos");
@@ -20,7 +21,7 @@ public class gestionDB {
 
     public static void crearTablaDeps(){
         //al utilizar el try with resources con un objeto closeable, este se cerrará en cualquier caso.
-        try(Connection miCon = ConexionBD.conectar("miBD")) {
+        try(Connection miCon = ConexionBD.conectar("mibd")) {
             //sentencias SQL para crear tabla departamentos
             String tablaDep = "CREATE TABLE departamentos (\n" +
                     " dept_no  TINYINT(2) NOT NULL PRIMARY KEY,\n" +
@@ -52,7 +53,7 @@ public class gestionDB {
     }
 
     public static void crearTablaEmps() {
-        try(Connection miCon = ConexionBD.conectar("miBD")) {
+        try(Connection miCon = ConexionBD.conectar("mibd")) {
             //crear tabla departamentos
             String tablaEmp = "CREATE TABLE empleados (\n" +
                     " emp_no    SMALLINT(4)  NOT NULL PRIMARY KEY,\n" +
@@ -79,12 +80,15 @@ public class gestionDB {
                     "INSERT INTO empleados VALUES (7900,'JIMENO','EMPLEADO',7698,'1991/12/03',1335,NULL,30)" ,
                     "INSERT INTO empleados VALUES (7902,'FERN NDEZ','ANALISTA',7566,'1991/12/03',3000,NULL,20)" ,
                     "INSERT INTO empleados VALUES (7934,'MU OZ','EMPLEADO',7782,'1992/01/23',1690,NULL,10)");
+
             Statement crearTablaDep = miCon.createStatement();
             crearTablaDep.execute("DROP TABLE IF EXISTS empleados");
             crearTablaDep.executeUpdate(tablaEmp);
+
             for (String e : addEmps) {
                 crearTablaDep.execute(e);
             }
+
         }catch (SQLSyntaxErrorException e) {
             System.out.println("Error en la sintaxis de la sentencia SQL" + e.getMessage());
         }catch (SQLIntegrityConstraintViolationException e) {

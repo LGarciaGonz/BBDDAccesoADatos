@@ -17,7 +17,7 @@ public class Main {
                     1. Crear base de datos
                     2. Crear tablas e insertar datos de inicio
                     3. Insertar nuevo Departamento
-                    4. Insertar nuevo Empleado               
+                    4. Insertar nuevo Empleado             
                     0. Salir
                     ----------------------------------------------""");
 

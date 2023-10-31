@@ -3,7 +3,6 @@ package code;
 import database.ConexionBD;
 import libs.Leer;
 
-import java.beans.PropertyEditorSupport;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
