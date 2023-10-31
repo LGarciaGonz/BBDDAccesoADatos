@@ -24,7 +24,7 @@ public class gestionDB {
         try(Connection miCon = ConexionBD.conectar("mibd")) {
             //sentencias SQL para crear tabla departamentos
             String tablaDep = "CREATE TABLE departamentos (\n" +
-                    " dept_no  TINYINT(2) NOT NULL PRIMARY KEY,\n" +
+                    " dept_no  SMALLINT NOT NULL PRIMARY KEY,\n" +
                     " dnombre  VARCHAR(15), \n" +
                     " loc      VARCHAR(15)\n" +
                     ")";
@@ -56,14 +56,14 @@ public class gestionDB {
         try(Connection miCon = ConexionBD.conectar("mibd")) {
             //crear tabla departamentos
             String tablaEmp = "CREATE TABLE empleados (\n" +
-                    " emp_no    SMALLINT(4)  NOT NULL PRIMARY KEY,\n" +
+                    " emp_no    SMALLINT  NOT NULL PRIMARY KEY,\n" +
                     " apellido  VARCHAR(10),\n" +
                     " oficio    VARCHAR(10),\n" +
                     " dir       SMALLINT,\n" +
                     " fecha_alt DATE      ,\n" +
-                    " salario   FLOAT(6,2),\n" +
-                    " comision  FLOAT(6,2),\n" +
-                    " dept_no   TINYINT(2) NOT NULL,\n" +
+                    " salario   FLOAT(6),\n" +
+                    " comision  FLOAT(6),\n" +
+                    " dept_no   SMALLINT NOT NULL,\n" +
                     " CONSTRAINT FK_DEP FOREIGN KEY (dept_no ) REFERENCES departamentos(dept_no)\n" +
                     ")";
             List<String> addEmps = Arrays.asList("INSERT INTO empleados VALUES (7369,'S NCHEZ','EMPLEADO',7902,'1990/12/17',1040,NULL,20)" ,
